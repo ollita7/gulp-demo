@@ -17,11 +17,6 @@ gulp.task("copy-html", function () {
         .pipe(gulp.dest(config.dist.base));
 });
 
-gulp.task("copy-libs", function(){
-    gulp.src(config.app.libs)
-        .pipe(gulp.dest(config.dist.libs));
-});
-
 gulp.task("copy-assets", function(){
     gulp.src(config.app.assets)
         .pipe(gulp.dest(config.dist.assets));
@@ -33,6 +28,16 @@ gulp.task("compile-scripts", function(){
         .pipe(uglify())
         .pipe(gulp.dest(config.dist.scripts));
 });
+
+gulp.task("compile-libs", function(){
+    gulp.src(config.app.compiledLibsStyles)
+        .pipe(concat('libs.min.css'))
+        .pipe(gulp.dest(config.dist.libs));
+
+    gulp.src(config.app.compiledLibsScripts)
+        .pipe(concat('libs.min.js'))
+        .pipe(gulp.dest(config.dist.libs));
+})
 
  gulp.task("compile-styles", function(){
     return gulp.src(config.app.less)
@@ -56,7 +61,7 @@ gulp.task('inject', function () {
 
 gulp.task('compile', function(callback){
   runSequence(
-            ["copy-html", "copy-libs" , "copy-assets", "compile-scripts",  "compile-styles"],
+            ["copy-html", "compile-libs" , "copy-assets", "compile-scripts",  "compile-styles"],
             "inject",
             callback);
 });

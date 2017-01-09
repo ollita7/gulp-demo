@@ -6,7 +6,14 @@ module.exports = {
         less: "app/**/*.less",
         scripts: "app/scripts/*.js",
         baseHtml: "app/base.html",
-        libs: "node_modules/**/*"
+        libs: "node_modules/**/*",
+        compiledLibsStyles: [
+                'node_modules/bootstrap/dist/css/bootstrap.min.css',
+                'node_modules/bootstrap/dist/css/bootstrap-theme.min.css'],
+         compiledLibsScripts:[
+                'node_modules/jquery/dist/jquery.min.js',
+                'node_modules/bootstrap/dist/js/bootstrap.min.js',
+                'node_modules/carousel/index.js']
     },
     dist: {
         base: "dist/",
@@ -16,6 +23,8 @@ module.exports = {
         indexHtml: "dist/index.html",
         libs: "dist/node_modules",
         scripts: "dist/scripts",
-        compiledSources: ['dist/**/*.js', 'dist/**/*.css', '!dist/node_modules/**/*']
+        compiledSources: [
+                'dist/**/*.js',
+                'dist/**/*.css']
     }
 }
