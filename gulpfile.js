@@ -34,6 +34,16 @@ gulp.task("compile-scripts", function(){
         .pipe(gulp.dest(config.dist.scripts));
 });
 
+ gulp.task("compile-styles", function(){
+    return gulp.src(config.app.less)
+    .pipe(less({
+      paths: [ path.join(__dirname, 'less', 'includes') ]
+    }))
+    .pipe(gulp.dest(config.dist.base))
+    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(gulp.dest(config.dist.base));
+});
+
 /* INJECT */
 gulp.task('inject', function () {
     var target = gulp.src(config.dist.indexHtml);
